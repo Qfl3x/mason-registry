@@ -34,4 +34,4 @@ jobs:
         working-directory: jetls-src
         shell: pwsh
         run: |
-          & .\bin\jetls.cmd serve --help  # adjust filename once you see what's actually there
+          & .\bin\jetls.bat serve --help  # adjust filename once you see what's actually there
