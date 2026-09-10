@@ -19,10 +19,9 @@ source:
         sed -i 's#dirname -- "\$0"#dirname -- "$(readlink -f -- "$0")"#' bin/jetls
     - target: win
       run: |
-        set JULIA_DEPOT_PATH="$(pwd):$(julia -e 'print(DEPOT_PATH[end])')"
-        julia -e 'using Pkg; Pkg.Apps.add(path=raw"'"$(pwd)"'")'
-        sed -i 's#dirname -- "\$0"#dirname -- "$(readlink -f -- "$0")"#' bin/jetls
-
+        $env:JETLS_BUILD_DIR = "$PWD"
+        $env:JULIA_DEPOT_PATH = "$env:JETLS_BUILD_DIR;" + (julia -e 'print(DEPOT_PATH[end])')
+        julia -e 'using Pkg; Pkg.Apps.add(path=ENV["JETLS_BUILD_DIR"])'
 bin:
   jetls: bin/jetls
 
