@@ -19,9 +19,10 @@ jobs:
         working-directory: jetls-src
         shell: pwsh
         run: |
-          $env:JULIA_DEPOT_PATH = "$PWD" + ";" + (julia -e 'print(DEPOT_PATH[end])')
-          julia -e "using Pkg; Pkg.Apps.add(path=raw`"$PWD`")"
-
+          $env:JETLS_BUILD_DIR = "$PWD"
+          $env:JULIA_DEPOT_PATH = "$env:JETLS_BUILD_DIR;" + (julia -e 'print(DEPOT_PATH[end])')
+          julia -e 'using Pkg; Pkg.Apps.add(path=ENV["JETLS_BUILD_DIR"])'
+          
       - name: Inspect what got generated
         working-directory: jetls-src
         shell: pwsh
