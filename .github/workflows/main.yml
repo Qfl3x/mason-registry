@@ -8,12 +8,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: aviatesk/JETLS.jl
-          ref: <the pinned commit/tag from your purl>
+          ref: 2026-09-06
           path: jetls-src
 
       - uses: julia-actions/setup-julia@v2
         with:
-          version: '1.11'   # match whatever you're targeting
+          version: '1.12'   # match whatever you're targeting
 
       - name: Run the build script logic
         working-directory: jetls-src
